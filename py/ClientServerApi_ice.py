@@ -22,137 +22,153 @@
 from sys import version_info as _version_info_
 import Ice, IcePy
 
-# Start of module main
-_M_main = Ice.openModule('main')
-__name__ = 'main'
+# Start of module Api
+_M_Api = Ice.openModule('Api')
+__name__ = 'Api'
 
-_M_main._t_GuiOperations = IcePy.defineValue('::main::GuiOperations', Ice.Value, -1, (), False, True, None, ())
+if '_t_StringArray' not in _M_Api.__dict__:
+    _M_Api._t_StringArray = IcePy.defineSequence('::Api::StringArray', (), IcePy._t_string)
 
-if 'GuiOperationsPrx' not in _M_main.__dict__:
-    _M_main.GuiOperationsPrx = Ice.createTempClass()
+_M_Api._t_GuiOperations = IcePy.defineValue('::Api::GuiOperations', Ice.Value, -1, (), False, True, None, ())
+
+if 'GuiOperationsPrx' not in _M_Api.__dict__:
+    _M_Api.GuiOperationsPrx = Ice.createTempClass()
     class GuiOperationsPrx(Ice.ObjectPrx):
 
         def ShowMessageBox(self, text, context=None):
-            return _M_main.GuiOperations._op_ShowMessageBox.invoke(self, ((text, ), context))
+            return _M_Api.GuiOperations._op_ShowMessageBox.invoke(self, ((text, ), context))
 
         def ShowMessageBoxAsync(self, text, context=None):
-            return _M_main.GuiOperations._op_ShowMessageBox.invokeAsync(self, ((text, ), context))
+            return _M_Api.GuiOperations._op_ShowMessageBox.invokeAsync(self, ((text, ), context))
 
         def begin_ShowMessageBox(self, text, _response=None, _ex=None, _sent=None, context=None):
-            return _M_main.GuiOperations._op_ShowMessageBox.begin(self, ((text, ), _response, _ex, _sent, context))
+            return _M_Api.GuiOperations._op_ShowMessageBox.begin(self, ((text, ), _response, _ex, _sent, context))
 
         def end_ShowMessageBox(self, _r):
-            return _M_main.GuiOperations._op_ShowMessageBox.end(self, _r)
+            return _M_Api.GuiOperations._op_ShowMessageBox.end(self, _r)
 
         @staticmethod
         def checkedCast(proxy, facetOrContext=None, context=None):
-            return _M_main.GuiOperationsPrx.ice_checkedCast(proxy, '::main::GuiOperations', facetOrContext, context)
+            return _M_Api.GuiOperationsPrx.ice_checkedCast(proxy, '::Api::GuiOperations', facetOrContext, context)
 
         @staticmethod
         def uncheckedCast(proxy, facet=None):
-            return _M_main.GuiOperationsPrx.ice_uncheckedCast(proxy, facet)
+            return _M_Api.GuiOperationsPrx.ice_uncheckedCast(proxy, facet)
 
         @staticmethod
         def ice_staticId():
-            return '::main::GuiOperations'
-    _M_main._t_GuiOperationsPrx = IcePy.defineProxy('::main::GuiOperations', GuiOperationsPrx)
+            return '::Api::GuiOperations'
+    _M_Api._t_GuiOperationsPrx = IcePy.defineProxy('::Api::GuiOperations', GuiOperationsPrx)
 
-    _M_main.GuiOperationsPrx = GuiOperationsPrx
+    _M_Api.GuiOperationsPrx = GuiOperationsPrx
     del GuiOperationsPrx
 
-    _M_main.GuiOperations = Ice.createTempClass()
+    _M_Api.GuiOperations = Ice.createTempClass()
     class GuiOperations(Ice.Object):
 
         def ice_ids(self, current=None):
-            return ('::Ice::Object', '::main::GuiOperations')
+            return ('::Api::GuiOperations', '::Ice::Object')
 
         def ice_id(self, current=None):
-            return '::main::GuiOperations'
+            return '::Api::GuiOperations'
 
         @staticmethod
         def ice_staticId():
-            return '::main::GuiOperations'
+            return '::Api::GuiOperations'
 
         def ShowMessageBox(self, text, current=None):
             raise NotImplementedError("servant method 'ShowMessageBox' not implemented")
 
         def __str__(self):
-            return IcePy.stringify(self, _M_main._t_GuiOperationsDisp)
+            return IcePy.stringify(self, _M_Api._t_GuiOperationsDisp)
 
         __repr__ = __str__
 
-    _M_main._t_GuiOperationsDisp = IcePy.defineClass('::main::GuiOperations', GuiOperations, (), None, ())
-    GuiOperations._ice_type = _M_main._t_GuiOperationsDisp
+    _M_Api._t_GuiOperationsDisp = IcePy.defineClass('::Api::GuiOperations', GuiOperations, (), None, ())
+    GuiOperations._ice_type = _M_Api._t_GuiOperationsDisp
 
     GuiOperations._op_ShowMessageBox = IcePy.Operation('ShowMessageBox', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_string, False, 0),), (), None, ())
 
-    _M_main.GuiOperations = GuiOperations
+    _M_Api.GuiOperations = GuiOperations
     del GuiOperations
 
-if '_t_StringArray' not in _M_main.__dict__:
-    _M_main._t_StringArray = IcePy.defineSequence('::main::StringArray', (), IcePy._t_string)
+_M_Api._t_Plugin = IcePy.defineValue('::Api::Plugin', Ice.Value, -1, (), False, True, None, ())
 
-_M_main._t_Plugin = IcePy.defineValue('::main::Plugin', Ice.Value, -1, (), False, True, None, ())
-
-if 'PluginPrx' not in _M_main.__dict__:
-    _M_main.PluginPrx = Ice.createTempClass()
+if 'PluginPrx' not in _M_Api.__dict__:
+    _M_Api.PluginPrx = Ice.createTempClass()
     class PluginPrx(Ice.ObjectPrx):
 
         def execute(self, files, context=None):
-            return _M_main.Plugin._op_execute.invoke(self, ((files, ), context))
+            return _M_Api.Plugin._op_execute.invoke(self, ((files, ), context))
 
         def executeAsync(self, files, context=None):
-            return _M_main.Plugin._op_execute.invokeAsync(self, ((files, ), context))
+            return _M_Api.Plugin._op_execute.invokeAsync(self, ((files, ), context))
 
         def begin_execute(self, files, _response=None, _ex=None, _sent=None, context=None):
-            return _M_main.Plugin._op_execute.begin(self, ((files, ), _response, _ex, _sent, context))
+            return _M_Api.Plugin._op_execute.begin(self, ((files, ), _response, _ex, _sent, context))
 
         def end_execute(self, _r):
-            return _M_main.Plugin._op_execute.end(self, _r)
+            return _M_Api.Plugin._op_execute.end(self, _r)
+
+        def shutdown(self, context=None):
+            return _M_Api.Plugin._op_shutdown.invoke(self, ((), context))
+
+        def shutdownAsync(self, context=None):
+            return _M_Api.Plugin._op_shutdown.invokeAsync(self, ((), context))
+
+        def begin_shutdown(self, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Api.Plugin._op_shutdown.begin(self, ((), _response, _ex, _sent, context))
+
+        def end_shutdown(self, _r):
+            return _M_Api.Plugin._op_shutdown.end(self, _r)
 
         @staticmethod
         def checkedCast(proxy, facetOrContext=None, context=None):
-            return _M_main.PluginPrx.ice_checkedCast(proxy, '::main::Plugin', facetOrContext, context)
+            return _M_Api.PluginPrx.ice_checkedCast(proxy, '::Api::Plugin', facetOrContext, context)
 
         @staticmethod
         def uncheckedCast(proxy, facet=None):
-            return _M_main.PluginPrx.ice_uncheckedCast(proxy, facet)
+            return _M_Api.PluginPrx.ice_uncheckedCast(proxy, facet)
 
         @staticmethod
         def ice_staticId():
-            return '::main::Plugin'
-    _M_main._t_PluginPrx = IcePy.defineProxy('::main::Plugin', PluginPrx)
+            return '::Api::Plugin'
+    _M_Api._t_PluginPrx = IcePy.defineProxy('::Api::Plugin', PluginPrx)
 
-    _M_main.PluginPrx = PluginPrx
+    _M_Api.PluginPrx = PluginPrx
     del PluginPrx
 
-    _M_main.Plugin = Ice.createTempClass()
+    _M_Api.Plugin = Ice.createTempClass()
     class Plugin(Ice.Object):
 
         def ice_ids(self, current=None):
-            return ('::Ice::Object', '::main::Plugin')
+            return ('::Api::Plugin', '::Ice::Object')
 
         def ice_id(self, current=None):
-            return '::main::Plugin'
+            return '::Api::Plugin'
 
         @staticmethod
         def ice_staticId():
-            return '::main::Plugin'
+            return '::Api::Plugin'
 
         def execute(self, files, current=None):
             raise NotImplementedError("servant method 'execute' not implemented")
 
+        def shutdown(self, current=None):
+            raise NotImplementedError("servant method 'shutdown' not implemented")
+
         def __str__(self):
-            return IcePy.stringify(self, _M_main._t_PluginDisp)
+            return IcePy.stringify(self, _M_Api._t_PluginDisp)
 
         __repr__ = __str__
 
-    _M_main._t_PluginDisp = IcePy.defineClass('::main::Plugin', Plugin, (), None, ())
-    Plugin._ice_type = _M_main._t_PluginDisp
+    _M_Api._t_PluginDisp = IcePy.defineClass('::Api::Plugin', Plugin, (), None, ())
+    Plugin._ice_type = _M_Api._t_PluginDisp
 
-    Plugin._op_execute = IcePy.Operation('execute', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_main._t_StringArray, False, 0),), (), None, ())
+    Plugin._op_execute = IcePy.Operation('execute', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Api._t_StringArray, False, 0),), (), None, ())
+    Plugin._op_shutdown = IcePy.Operation('shutdown', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (), (), None, ())
 
-    _M_main.Plugin = Plugin
+    _M_Api.Plugin = Plugin
     del Plugin
 
-# End of module main
+# End of module Api

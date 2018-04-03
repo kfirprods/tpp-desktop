@@ -27,7 +27,7 @@ namespace tpp_desktop
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            // ice stuff
+            PluginRunner.RunPlugin("C:\\Projects\\tpp-desktop\\py\\test_plugin.py", "TestPlugin");
         }
     }
 }
