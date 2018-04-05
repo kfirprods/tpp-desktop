@@ -4,9 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tpp_desktop"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:view="clr-namespace:tpp_desktop.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Width="130" Height="50" Content="Hello World" Click="ButtonBase_OnClick" />
-    </Grid>
+        Title="tpp - Textual Post Processing for Projects" 
+        Height="650" Width="1100"
+        WindowStartupLocation="CenterScreen"
+        Closed="MainWindow_OnClosed"
+        d:DataContext="{d:DesignInstance local:ControllerViewModel}">
+    <telerik:RadTileList ItemsSource="{Binding PluginGroups}"
+                         TileReorderMode="None"
+                         SelectionMode="Multiple"
+                         VerticalTilesAlignment="Top">
+        <telerik:RadTileList.ItemTemplate>
+            <DataTemplate>
+                <view:PluginGroupControl />
+            </DataTemplate>
+        </telerik:RadTileList.ItemTemplate>
+    </telerik:RadTileList>
 </Window>

@@ -23,11 +23,19 @@ namespace tpp_desktop
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = new ControllerViewModel();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             PluginRunner.RunPlugin("C:\\Projects\\tpp-desktop\\py\\test_plugin.py", "TestPlugin");
+        }
+
+        private void MainWindow_OnClosed(object sender, EventArgs e)
+        {
+            var controller = this.DataContext as ControllerViewModel;
+            controller?.Shutdown();
         }
     }
 }
