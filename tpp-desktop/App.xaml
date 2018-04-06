@@ -1,4 +1,7 @@
-﻿<Application x:Class="tpp_desktop.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:tpp_desktop" StartupUri="MainWindow.xaml">
+﻿<Application x:Class="tpp_desktop.App" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tppDesktop="clr-namespace:tpp_desktop">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -9,6 +12,8 @@
                 <ResourceDictionary Source="/Telerik.Windows.Themes.Material;component/Themes/Telerik.Windows.Controls.Navigation.xaml" />
                 <ResourceDictionary Source="/Telerik.Windows.Themes.Material;component/Themes/Telerik.Windows.Controls.FileDialogs.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="tppDesktop:MainWindow" BasedOn="{StaticResource RadWindowStyle}" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

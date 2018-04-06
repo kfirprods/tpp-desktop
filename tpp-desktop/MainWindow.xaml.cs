@@ -1,24 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Telerik.Windows;
+using Telerik.Windows.Controls;
 
 namespace tpp_desktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : RadWindow
     {
         public MainWindow()
         {
@@ -27,15 +18,32 @@ namespace tpp_desktop
             this.DataContext = new ControllerViewModel();
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            PluginRunner.RunPlugin("C:\\Projects\\tpp-desktop\\py\\test_plugin.py", "TestPlugin");
-        }
-
         private void MainWindow_OnClosed(object sender, EventArgs e)
         {
             var controller = this.DataContext as ControllerViewModel;
             controller?.Shutdown();
         }
+
+        #region Restoring standard Window functionality due to use of RadWindow 
+        private void Icon_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.IconContextMenu.IsOpen = true;
+        }
+
+        private void Minimize_OnClick(object sender, RadRoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void Maximize_OnClick(object sender, RadRoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Maximized;
+        }
+
+        private void Close_OnClick(object sender, RadRoutedEventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
     }
 }

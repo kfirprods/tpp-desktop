@@ -8,14 +8,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModel:PluginGroupViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="TextWrapping" Value="Wrap" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        <!-- TODO: Add FAVORITE button to top-right -->
 
-        <TextBlock Grid.Row="0" FontWeight="Bold">
+        <TextBlock Grid.Row="0" FontWeight="Bold" Margin="0, 0, 0, 5">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} by {1}">
                     <Binding Path="Name" />
@@ -25,12 +35,6 @@
         </TextBlock>
 
         <TextBlock Grid.Row="1" Text="{Binding Description}" />
-
-        <!-- TODO: Allow drag & drop of files to this control -->
-        <!-- TODO: Show plugins like tags -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            
-        </StackPanel>
 
         <local:ReadonlyTagsControl Grid.Row="2"
                                    VerticalAlignment="Bottom"
