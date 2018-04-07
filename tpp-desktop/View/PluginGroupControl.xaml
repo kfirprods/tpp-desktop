@@ -22,17 +22,48 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <!-- TODO: Add FAVORITE button to top-right -->
 
-        <TextBlock Grid.Row="0" FontWeight="Bold" Margin="0, 0, 0, 5">
-            <TextBlock.Text>
-                <MultiBinding StringFormat="{}{0} by {1}">
-                    <Binding Path="Name" />
-                    <Binding Path="Author" />
-                </MultiBinding>
-            </TextBlock.Text>
-        </TextBlock>
+        <Grid Grid.Row="0" Margin="0, 0, 0, 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" FontWeight="Bold">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} by {1}">
+                        <Binding Path="Name" />
+                        <Binding Path="Author" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            
+            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top" Margin="0, 0, 10, 0">
+                <Image Source="../Resources/star_outlined.png" Width="18" Height="18">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                                    <Setter Property="Source" Value="../Resources/star_filled.png" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+
+                <Image Source="../Resources/synced.png" Width="18" Height="18">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RemoteGroupId}" Value="0">
+                                    <Setter Property="Source" Value="../Resources/not_synced.png" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </StackPanel>
+        </Grid>
 
         <TextBlock Grid.Row="1" Text="{Binding Description}" />
 

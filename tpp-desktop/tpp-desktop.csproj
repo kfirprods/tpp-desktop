@@ -184,6 +184,12 @@
   <ItemGroup>
     <Resource Include="Resources\close.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\not_synced.png" />
+    <Resource Include="Resources\star_filled.png" />
+    <Resource Include="Resources\star_outlined.png" />
+    <Resource Include="Resources\synced.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

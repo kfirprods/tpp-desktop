@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace tpp_desktop.ViewModel
+﻿namespace tpp_desktop.ViewModel
 {
     public class PluginViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        // TODO: Notify property changed
         public string LocalFilePath { get; set; }
-        public string RemoteFilePath { get; set; }
+        // TODO: Notify property changed
+        public int RemotePluginId { get; set; }
         public string Author { get; set; }
 
-        public PluginViewModel(string name, string description, string localFilePath, string remoteFilePath, string author)
+        public PluginViewModel(string name, string description, string localFilePath, int remotePluginId, string author)
         {
             this.Name = name;
             this.Description = description;
             this.LocalFilePath = localFilePath;
-            this.RemoteFilePath = remoteFilePath;
+            this.RemotePluginId = remotePluginId;
             this.Author = author;
         }
     }

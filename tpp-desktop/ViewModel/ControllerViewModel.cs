@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using tpp_desktop.Common;
 using tpp_desktop.Utilities;
 using tpp_desktop.ViewModel;
@@ -57,9 +54,9 @@ namespace tpp_desktop
             this._dbConnection.Open();
 
             // Create tables
-            new SQLiteCommand("CREATE TABLE Plugins(name TEXT, description TEXT, localFilePath TEXT, remoteFilePath TEXT, author TEXT)",
+            new SQLiteCommand("CREATE TABLE Plugins(name TEXT, description TEXT, localFilePath TEXT, remotePluginId INTEGER, author TEXT)",
                 this._dbConnection).ExecuteNonQuery();
-            new SQLiteCommand("CREATE TABLE PluginGroups(name TEXT, description TEXT, author TEXT)",
+            new SQLiteCommand("CREATE TABLE PluginGroups(name TEXT, description TEXT, author TEXT, isFavorite INTEGER, remoteGroupId INTEGER)",
                 this._dbConnection).ExecuteNonQuery();
             new SQLiteCommand("CREATE TABLE PluginGroupPlugins(groupId INT, pluginId INT)", this._dbConnection)
                 .ExecuteNonQuery();
@@ -83,11 +80,15 @@ namespace tpp_desktop
                                   pluginTable.Rows[0]["name"].ToString(),
                                   pluginTable.Rows[0]["description"].ToString(),
                                   pluginTable.Rows[0]["localFilePath"].ToString(),
-                                  pluginTable.Rows[0]["remoteFilePath"].ToString(),
+                                  int.Parse(pluginTable.Rows[0]["remotePluginId"].ToString()),
                                   pluginTable.Rows[0]["author"].ToString()
                               );
 
-                pluginGroups.Add(new PluginGroupViewModel(groupRow["name"].ToString(), groupRow["description"].ToString(), groupRow["author"].ToString(), plugins));
+                pluginGroups.Add(new PluginGroupViewModel(groupRow["name"].ToString(),
+                    groupRow["description"].ToString(), groupRow["author"].ToString(),
+                    groupRow["isFavorite"].ToString() == "1", 
+                    int.Parse(groupRow["remoteGroupId"].ToString()),
+                    plugins));
             }
 
             this.PluginGroups = new ObservableCollection<PluginGroupViewModel>(pluginGroups);
