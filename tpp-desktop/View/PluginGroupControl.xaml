@@ -39,29 +39,23 @@
             </TextBlock>
             
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top" Margin="0, 0, 10, 0">
-                <Image Source="../Resources/star_outlined.png" Width="18" Height="18">
-                    <Image.Style>
-                        <Style TargetType="{x:Type Image}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsFavorite}" Value="True">
-                                    <Setter Property="Source" Value="../Resources/star_filled.png" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+                <local:ImageCheckBox Width="18" Height="18" 
+                                     CheckedImagePath="../Resources/star_filled.png"
+                                     UncheckedImagePath="../Resources/star_outlined.png">
+                    <!-- TODO: Tooltip to change based on is checked value -->
+                    <local:ImageCheckBox.ToolTip>
+                        Pin to favorites
+                    </local:ImageCheckBox.ToolTip>
+                </local:ImageCheckBox>
 
-                <Image Source="../Resources/synced.png" Width="18" Height="18">
-                    <Image.Style>
-                        <Style TargetType="{x:Type Image}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding RemoteGroupId}" Value="0">
-                                    <Setter Property="Source" Value="../Resources/not_synced.png" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+                <local:ImageCheckBox Width="18" Height="18" 
+                                     CheckedImagePath="../Resources/not_synced.png"
+                                     UncheckedImagePath="../Resources/synced.png">
+                    <!-- TODO: Bind IsEnabled to user's ownership of the group -->
+                    <local:ImageCheckBox.ToolTip>
+                        Sync with server
+                    </local:ImageCheckBox.ToolTip>
+                </local:ImageCheckBox>
             </StackPanel>
         </Grid>
 
