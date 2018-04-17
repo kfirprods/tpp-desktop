@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
@@ -19,7 +21,7 @@ namespace tpp_desktop
 
         public ObservableCollection<PluginGroupViewModel> PluginGroups
         {
-            get => this._pluginGroups ?? (this._pluginGroups = new ObservableCollection<PluginGroupViewModel>());
+            get => this._pluginGroups;
             set
             {
                 this._pluginGroups = value;
@@ -29,6 +31,26 @@ namespace tpp_desktop
 
         public ControllerViewModel()
         {
+            this._pluginGroups = new ObservableCollection<PluginGroupViewModel>();
+            this._pluginGroups.CollectionChanged += (sender, args) =>
+            {
+                if (args.NewItems != null)
+                {
+                    foreach (PluginGroupViewModel newItem in args.NewItems)
+                    {
+                        newItem.PropertyChanged += UpdatePluginGroupControl;
+                    }
+                }
+
+                if (args.OldItems != null)
+                {
+                    foreach (PluginGroupViewModel newItem in args.OldItems)
+                    {
+                        newItem.PropertyChanged -= UpdatePluginGroupControl;
+                    }
+                }
+            };
+
             if (!File.Exists(DatabaseFilename))
             {
                 this.InitializeDatabase();
@@ -42,6 +64,15 @@ namespace tpp_desktop
             }
 
             this.FetchPluginGroups();
+        }
+
+        private void UpdatePluginGroupControl(object o, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            var group = (PluginGroupViewModel) o;
+            this._dbConnection.ExecuteNonQuery("UPDATE PluginGroups " +
+                                               $"SET IsFavorite={(group.IsFavorite ? 1 : 0)}, " +
+                                               $"RemoteGroupId={group.RemoteGroupId} " +
+                                               $"WHERE rowid={group.LocalPluginId}");
         }
 
         private void InitializeDatabase()
@@ -84,14 +115,15 @@ namespace tpp_desktop
                                   pluginTable.Rows[0]["author"].ToString()
                               );
 
-                pluginGroups.Add(new PluginGroupViewModel(groupRow["name"].ToString(),
+                pluginGroups.Add(new PluginGroupViewModel(groupId, groupRow["name"].ToString(),
                     groupRow["description"].ToString(), groupRow["author"].ToString(),
                     groupRow["isFavorite"].ToString() == "1", 
                     int.Parse(groupRow["remoteGroupId"].ToString()),
                     plugins));
             }
 
-            this.PluginGroups = new ObservableCollection<PluginGroupViewModel>(pluginGroups);
+            foreach (var group in pluginGroups)
+                this.PluginGroups.Add(group);
         }
 
         public void Shutdown()

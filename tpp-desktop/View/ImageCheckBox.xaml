@@ -7,7 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance view:ImageCheckBox}">
-    <ToggleButton>
+    <ToggleButton IsChecked="{Binding IsChecked}"
+                  PreviewMouseUp="UIElement_OnPreviewMouseUp"
+                  PreviewMouseDown="UIElement_OnPreviewMouseDown">
         <ToggleButton.Template>
             <ControlTemplate TargetType="{x:Type ToggleButton}">
                 <StackPanel Orientation="Horizontal">

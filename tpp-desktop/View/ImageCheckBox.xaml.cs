@@ -20,7 +20,14 @@ namespace tpp_desktop.View
     /// </summary>
     public partial class ImageCheckBox : UserControl
     {
-        // TODO: Expose IsChecked
+        public static readonly DependencyProperty IsCheckedProperty =
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(ImageCheckBox));
+
+        public bool IsChecked
+        {
+            get => (bool) GetValue(IsCheckedProperty);
+            set => SetValue(IsCheckedProperty, value);
+        }
 
         public static readonly DependencyProperty UncheckedImagePathProperty =
             DependencyProperty.Register("UncheckedImagePath", typeof(string), typeof(ImageCheckBox));
@@ -44,6 +51,18 @@ namespace tpp_desktop.View
         {
             InitializeComponent();
             this.DataContext = this;
+        }
+
+        // Prevent mouse clicks from propagating because we don't want containing tiles to take it as a click
+        private void UIElement_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+            this.IsChecked = !this.IsChecked;
+        }
+
+        private void UIElement_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

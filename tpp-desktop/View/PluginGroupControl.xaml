@@ -41,7 +41,8 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top" Margin="0, 0, 10, 0">
                 <local:ImageCheckBox Width="18" Height="18" 
                                      CheckedImagePath="../Resources/star_filled.png"
-                                     UncheckedImagePath="../Resources/star_outlined.png">
+                                     UncheckedImagePath="../Resources/star_outlined.png"
+                                     IsChecked="{Binding IsFavorite, Mode=TwoWay}">
                     <!-- TODO: Tooltip to change based on is checked value -->
                     <local:ImageCheckBox.ToolTip>
                         Pin to favorites
@@ -50,7 +51,8 @@
 
                 <local:ImageCheckBox Width="18" Height="18" 
                                      CheckedImagePath="../Resources/not_synced.png"
-                                     UncheckedImagePath="../Resources/synced.png">
+                                     UncheckedImagePath="../Resources/synced.png"
+                                     IsChecked="{Binding IsSynced}">
                     <!-- TODO: Bind IsEnabled to user's ownership of the group -->
                     <local:ImageCheckBox.ToolTip>
                         Sync with server
