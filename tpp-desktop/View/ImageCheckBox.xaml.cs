@@ -21,7 +21,12 @@ namespace tpp_desktop.View
     public partial class ImageCheckBox : UserControl
     {
         public static readonly DependencyProperty IsCheckedProperty =
-            DependencyProperty.Register("IsChecked", typeof(bool), typeof(ImageCheckBox));
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(ImageCheckBox),
+                new FrameworkPropertyMetadata
+                {
+                    BindsTwoWayByDefault = true,
+                    DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                });
 
         public bool IsChecked
         {
@@ -50,7 +55,6 @@ namespace tpp_desktop.View
         public ImageCheckBox()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
 
         // Prevent mouse clicks from propagating because we don't want containing tiles to take it as a click

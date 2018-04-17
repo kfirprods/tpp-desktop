@@ -42,7 +42,7 @@
                 <local:ImageCheckBox Width="18" Height="18" 
                                      CheckedImagePath="../Resources/star_filled.png"
                                      UncheckedImagePath="../Resources/star_outlined.png"
-                                     IsChecked="{Binding IsFavorite, Mode=TwoWay}">
+                                     IsChecked="{Binding IsFavorite}">
                     <!-- TODO: Tooltip to change based on is checked value -->
                     <local:ImageCheckBox.ToolTip>
                         Pin to favorites

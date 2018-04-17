@@ -34,7 +34,14 @@ namespace tpp_desktop.ViewModel
             }
         }
 
-        public bool IsSynced => RemoteGroupId > 0;
+        public bool IsSynced
+        {
+            get => RemoteGroupId > 0;
+            set
+            {
+                // handle somehow
+            }
+        }
 
         private ObservableCollection<PluginViewModel> _plugins;
         public ObservableCollection<PluginViewModel> Plugins => this._plugins ?? (this._plugins = new ObservableCollection<PluginViewModel>());

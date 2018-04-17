@@ -6,8 +6,9 @@
              xmlns:view="clr-namespace:tpp_desktop.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="self"
              d:DataContext="{d:DesignInstance view:ImageCheckBox}">
-    <ToggleButton IsChecked="{Binding IsChecked}"
+    <ToggleButton IsChecked="{Binding IsChecked, ElementName=self}"
                   PreviewMouseUp="UIElement_OnPreviewMouseUp"
                   PreviewMouseDown="UIElement_OnPreviewMouseDown">
         <ToggleButton.Template>
@@ -19,13 +20,11 @@
                                 <Setter Property="Cursor" Value="Hand" />
                                 
                                 <Setter Property="Source" 
-                                        Value="{Binding UncheckedImagePath}" />
+                                        Value="{Binding UncheckedImagePath, ElementName=self}" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsChecked, 
-                                    RelativeSource={RelativeSource AncestorType=
-                                    {x:Type ToggleButton}}}" Value="True">
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=self}" Value="True">
                                         <Setter Property="Source" 
-                                                Value="{Binding CheckedImagePath}" />
+                                                Value="{Binding CheckedImagePath, ElementName=self}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
