@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Telerik.Windows;
 using Telerik.Windows.Controls;
@@ -13,8 +15,7 @@ namespace tpp_desktop
     {
         public MainWindow()
         {
-            InitializeComponent();
-
+            this.InitializeComponent();
             this.DataContext = new ControllerViewModel();
         }
 
@@ -45,5 +46,12 @@ namespace tpp_desktop
             this.Close();
         }
         #endregion
+
+        private void GroupTileList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.GroupDetail.DataContext = this.GroupTileList.SelectedItem;
+            this.GroupDetail.Visibility = Visibility.Visible;
+            this.GroupTileList.Visibility = Visibility.Collapsed;
+        }
     }
 }

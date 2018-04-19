@@ -107,11 +107,12 @@
     <Compile Include="Utilities\PythonUtilities.cs" />
     <Compile Include="ViewModel\PluginGroupViewModel.cs" />
     <Compile Include="ViewModel\PluginViewModel.cs" />
+    <Compile Include="View\Converters\BooleanToFavoriteStringConverter.cs" />
+    <Compile Include="View\GroupDetailControl.xaml.cs">
+      <DependentUpon>GroupDetailControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ImageCheckBox.xaml.cs">
       <DependentUpon>ImageCheckBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PluginControl.xaml.cs">
-      <DependentUpon>PluginControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PluginGroupControl.xaml.cs">
       <DependentUpon>PluginGroupControl.xaml</DependentUpon>
@@ -131,13 +132,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\ImageCheckBox.xaml">
+    <Page Include="View\GroupDetailControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PluginControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\ImageCheckBox.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PluginGroupControl.xaml">
       <SubType>Designer</SubType>

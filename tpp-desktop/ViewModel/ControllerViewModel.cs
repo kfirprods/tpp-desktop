@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
+using System.Windows.Data;
 using tpp_desktop.Common;
 using tpp_desktop.Utilities;
 using tpp_desktop.ViewModel;
@@ -16,6 +17,8 @@ namespace tpp_desktop
     {
         private const string DatabaseFilename = "tpp.sqlite";
         private SQLiteConnection _dbConnection;
+
+        public PluginGroupViewModel SelectedGroup { get; set; }
 
         private ObservableCollection<PluginGroupViewModel> _pluginGroups;
 
@@ -28,7 +31,7 @@ namespace tpp_desktop
                 this.OnPropertyChanged();
             }
         }
-
+        
         public ControllerViewModel()
         {
             this._pluginGroups = new ObservableCollection<PluginGroupViewModel>();
@@ -44,9 +47,9 @@ namespace tpp_desktop
 
                 if (args.OldItems != null)
                 {
-                    foreach (PluginGroupViewModel newItem in args.OldItems)
+                    foreach (PluginGroupViewModel oldItem in args.OldItems)
                     {
-                        newItem.PropertyChanged -= UpdatePluginGroupControl;
+                        oldItem.PropertyChanged -= UpdatePluginGroupControl;
                     }
                 }
             };
@@ -66,8 +69,28 @@ namespace tpp_desktop
             this.FetchPluginGroups();
         }
 
+        private void OrderPluginsByFavorite()
+        {
+            if (this.PluginGroups.All(group => group.IsFavorite) || this.PluginGroups.All(group => !group.IsFavorite))
+            {
+                return;
+            }
+
+            var orderedPluginGroups = this.PluginGroups.OrderByDescending(pluginGroup => pluginGroup.IsFavorite).ToArray();
+            this.PluginGroups.Clear();
+
+            foreach (var group in orderedPluginGroups)
+                this.PluginGroups.Add(group);
+        }
+
         private void UpdatePluginGroupControl(object o, PropertyChangedEventArgs propertyChangedEventArgs)
         {
+            if (propertyChangedEventArgs.PropertyName == "IsFavorite")
+            {
+                this.OnPropertyChanged(nameof(PluginGroups));
+                this.OrderPluginsByFavorite();
+            }
+
             var group = (PluginGroupViewModel) o;
             this._dbConnection.ExecuteNonQuery("UPDATE PluginGroups " +
                                                $"SET IsFavorite={(group.IsFavorite ? 1 : 0)}, " +
@@ -95,7 +118,7 @@ namespace tpp_desktop
 
         private void FetchPluginGroups()
         {
-            var groupsTable = this._dbConnection.FetchTable("SELECT rowid, * FROM PluginGroups");
+            var groupsTable = this._dbConnection.FetchTable("SELECT rowid, * FROM PluginGroups ORDER BY IsFavorite DESC");
             var pluginGroups = new List<PluginGroupViewModel>();
 
             foreach (DataRow groupRow in groupsTable.Rows)

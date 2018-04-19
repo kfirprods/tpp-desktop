@@ -9,12 +9,22 @@
         mc:Ignorable="d"
         Header="tpp - Textual Post Processing for Projects" 
         xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+        xmlns:converters="clr-namespace:tpp_desktop.View.Converters"
         navigation:RadWindowInteropHelper.ShowInTaskbar="True"
         navigation:RadWindowInteropHelper.Icon="Resources/icon.ico"
         Height="650" Width="1100"
         WindowStartupLocation="CenterScreen"
         Closed="MainWindow_OnClosed"
         d:DataContext="{d:DesignInstance local:ControllerViewModel}">
+    <telerik:RadWindow.Resources>
+        <converters:BooleanToFavoriteStringConverter x:Key="BooleanToFavoriteStringConverter" />
+
+        <CollectionViewSource x:Key="Groups" Source="{Binding PluginGroups}" IsLiveGroupingRequested="True">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="IsFavorite" Converter="{StaticResource BooleanToFavoriteStringConverter}" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </telerik:RadWindow.Resources>
     <telerik:RadWindow.Icon>
         <Image Source="Resources/icon.ico" 
                Width="24" 
@@ -48,14 +58,22 @@
             </telerik:RadContextMenu.ContextMenu>
         </Image>
     </telerik:RadWindow.Icon>
-    <telerik:RadTileList ItemsSource="{Binding PluginGroups}"
-                         TileReorderMode="None"
-                         VerticalTilesAlignment="Top">
-        <!-- TODO: Bind selected item and when a plugin group is selected, bring up its view -->
-        <telerik:RadTileList.ItemTemplate>
-            <DataTemplate>
-                <view:PluginGroupControl />
-            </DataTemplate>
-        </telerik:RadTileList.ItemTemplate>
-    </telerik:RadTileList>
+
+    <Grid>
+        <telerik:RadTileList TileReorderMode="None"
+                             x:Name="GroupTileList"
+                             VerticalTilesAlignment="Top"
+                             ItemsSource="{Binding PluginGroups}"
+                             SelectedItem="{Binding SelectedGroup, Mode=OneWayToSource}"
+                             SelectionChanged="GroupTileList_SelectionChanged">
+            <!-- TODO: Bind selected item and when a plugin group is selected, bring up its view -->
+            <telerik:RadTileList.ItemTemplate>
+                <DataTemplate>
+                    <view:PluginGroupControl />
+                </DataTemplate>
+            </telerik:RadTileList.ItemTemplate>
+        </telerik:RadTileList>
+
+        <view:GroupDetailControl x:Name="GroupDetail" Visibility="Collapsed" />
+    </Grid>
 </telerik:RadWindow>
