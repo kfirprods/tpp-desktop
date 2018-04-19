@@ -192,6 +192,9 @@
     <Resource Include="Resources\star_outlined.png" />
     <Resource Include="Resources\synced.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\back_arrow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

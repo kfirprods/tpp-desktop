@@ -24,5 +24,11 @@ namespace tpp_desktop.View
         {
             InitializeComponent();
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Animate
+            this.Visibility = Visibility.Collapsed;
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace tpp_desktop
             var controller = this.DataContext as ControllerViewModel;
             controller?.Shutdown();
         }
-
+        
         #region Restoring standard Window functionality due to use of RadWindow 
         private void Icon_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -49,9 +49,19 @@ namespace tpp_desktop
 
         private void GroupTileList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // TODO: Animate the transition
             this.GroupDetail.DataContext = this.GroupTileList.SelectedItem;
             this.GroupDetail.Visibility = Visibility.Visible;
             this.GroupTileList.Visibility = Visibility.Collapsed;
+            this.GroupTileList.SelectedItem = null;
+        }
+
+        private void GroupDetail_OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.GroupDetail.Visibility == Visibility.Collapsed)
+            {
+                this.GroupTileList.Visibility = Visibility.Visible;
+            }
         }
     }
 }

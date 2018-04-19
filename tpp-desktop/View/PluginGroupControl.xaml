@@ -39,7 +39,7 @@
             </TextBlock>
             
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top" Margin="0, 0, 10, 0">
-                <local:ImageCheckBox Width="18" Height="18" 
+                <local:ImageCheckBox Width="20" Height="20" 
                                      CheckedImagePath="../Resources/star_filled.png"
                                      UncheckedImagePath="../Resources/star_outlined.png"
                                      IsChecked="{Binding IsFavorite}">
@@ -49,7 +49,7 @@
                     </local:ImageCheckBox.ToolTip>
                 </local:ImageCheckBox>
 
-                <local:ImageCheckBox Width="18" Height="18" 
+                <local:ImageCheckBox Width="20" Height="20" 
                                      CheckedImagePath="../Resources/not_synced.png"
                                      UncheckedImagePath="../Resources/synced.png"
                                      IsChecked="{Binding IsSynced}">

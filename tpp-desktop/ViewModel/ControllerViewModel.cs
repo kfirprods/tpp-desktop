@@ -41,6 +41,7 @@ namespace tpp_desktop
                 {
                     foreach (PluginGroupViewModel newItem in args.NewItems)
                     {
+                        newItem.PropertyChanged -= UpdatePluginGroupControl;
                         newItem.PropertyChanged += UpdatePluginGroupControl;
                     }
                 }
