@@ -7,6 +7,7 @@
              xmlns:viewModel="clr-namespace:tpp_desktop.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
+             Padding="20"
              d:DataContext="{d:DesignInstance viewModel:PluginGroupViewModel}">
 
     <UserControl.Resources>
@@ -51,7 +52,52 @@
             </DrawingBrush.Drawing>
         </DrawingBrush>
 
-        <ControlTemplate x:Key="DrawingBrushButton" TargetType="{x:Type Button}">
+        <ControlTemplate x:Key="AddFilesButtonTemplate" TargetType="{x:Type Button}">
+            <Grid>
+                <Grid Name="Normal" Opacity="0.85">
+                    <Image Source="/Resources/plus-sign.png"
+                           Width="{TemplateBinding Width}"
+                           Height="{TemplateBinding Height}" />
+                </Grid>
+
+                <Grid Name="Disabled">
+                    <Image Source="/Resources/plus-sign.png"
+                           Width="{TemplateBinding Width}"
+                           Height="{TemplateBinding Height}" />
+                </Grid>
+
+                <Grid Name="Hover" Opacity="0.7">
+                    <Image Source="/Resources/plus-sign.png"
+                           Width="{TemplateBinding Width}"
+                           Height="{TemplateBinding Height}" />
+                </Grid>
+
+                <Grid Name="Pressed" Opacity="1">
+                    <Image Source="/Resources/plus-sign.png"
+                           Width="{TemplateBinding Width}"
+                           Height="{TemplateBinding Height}" />
+                </Grid>
+
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Normal" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="Hover" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Normal" Property="Visibility" Value="Collapsed" />
+                    <Setter TargetName="Hover" Property="Visibility" Value="Visible" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Normal" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="Disabled" Property="Visibility" Value="Visible"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="BackButtonTemplate" TargetType="{x:Type Button}">
             <Grid>
                 <Rectangle Name="Normal" 
                            Fill="{StaticResource ArrowRegular}" />
@@ -81,15 +127,44 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </UserControl.Resources>
-    
+
     <Grid>
         <StackPanel>
-            <Button Template="{StaticResource DrawingBrushButton}"
+            <Button Template="{StaticResource BackButtonTemplate}"
                     Width="40" 
                     Height="40"
                     FlowDirection="RightToLeft"
-                    Click="BackButton_Click"/>
-            <TextBlock FontSize="32" Text="{Binding Name}" />
+                    Click="BackButton_Click"
+                    HorizontalAlignment="Left" />
+
+            <TextBlock FontSize="24" HorizontalAlignment="Center" Text="{Binding Name}" />
+
+            <Border BorderThickness="1,1,1,1" HorizontalAlignment="Center" Padding="120">
+                <Border.BorderBrush>
+                    <DrawingBrush Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <GeometryDrawing Brush="Black">
+                                    <GeometryDrawing.Geometry>
+                                        <GeometryGroup>
+                                            <RectangleGeometry Rect="0,0,50,50" />
+                                            <RectangleGeometry Rect="50,50,50,50" />
+                                        </GeometryGroup>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Border.BorderBrush>
+
+                <StackPanel>
+                    <TextBlock Text="Drag and drop files here to run the plugin group on them" />
+                    
+                    <Button Template="{StaticResource AddFilesButtonTemplate}" 
+                            Width="100" 
+                            Height="100" />
+                </StackPanel>
+            </Border>
         </StackPanel>
     </Grid>
 </UserControl>

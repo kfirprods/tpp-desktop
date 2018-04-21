@@ -49,11 +49,12 @@ namespace tpp_desktop
 
         private void GroupTileList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (this.GroupTileList.SelectedItem == null) return;
+
             // TODO: Animate the transition
             this.GroupDetail.DataContext = this.GroupTileList.SelectedItem;
             this.GroupDetail.Visibility = Visibility.Visible;
             this.GroupTileList.Visibility = Visibility.Collapsed;
-            this.GroupTileList.SelectedItem = null;
         }
 
         private void GroupDetail_OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -61,6 +62,7 @@ namespace tpp_desktop
             if (this.GroupDetail.Visibility == Visibility.Collapsed)
             {
                 this.GroupTileList.Visibility = Visibility.Visible;
+                this.GroupTileList.SelectedItem = null;
             }
         }
     }
