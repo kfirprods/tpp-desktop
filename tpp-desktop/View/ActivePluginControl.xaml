@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="tpp_desktop.View.ActivePluginControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:tpp_desktop.View"
+             xmlns:viewModel="clr-namespace:tpp_desktop.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewModel:PluginViewModel}">
+    <Grid>
+        <!-- Loading -->
+        <Grid Background="#66000000">
+            <Grid.Style>
+                <Style TargetType="{x:Type Grid}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ExecutionStage}" 
+                                     Value="{x:Static viewModel:PluginExecutionStage.Loading}">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+        
+        <!-- Processing file -->
+    </Grid>
+</UserControl>

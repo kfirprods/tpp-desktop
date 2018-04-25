@@ -46,6 +46,15 @@
     <Reference Include="Ice, Version=3.7.0.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
       <HintPath>..\packages\zeroc.ice.net.3.7.0\lib\Ice.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShowMeTheXAML.1.0.10\lib\net45\ShowMeTheXAML.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML.AvalonEdit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShowMeTheXAML.AvalonEdit.1.0.10\lib\net45\ShowMeTheXAML.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -107,6 +116,9 @@
     <Compile Include="Utilities\PythonUtilities.cs" />
     <Compile Include="ViewModel\PluginGroupViewModel.cs" />
     <Compile Include="ViewModel\PluginViewModel.cs" />
+    <Compile Include="View\ActivePluginControl.xaml.cs">
+      <DependentUpon>ActivePluginControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Converters\BooleanToFavoriteStringConverter.cs" />
     <Compile Include="View\FilesDragDropControl.xaml.cs">
       <DependentUpon>FilesDragDropControl.xaml</DependentUpon>
@@ -135,6 +147,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ActivePluginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FilesDragDropControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,8 +223,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\zeroc.ice.net.3.7.0\build\zeroc.ice.net.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zeroc.ice.net.3.7.0\build\zeroc.ice.net.props'))" />
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\zeroc.ice.net.3.7.0\build\zeroc.ice.net.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zeroc.ice.net.3.7.0\build\zeroc.ice.net.props'))" />
   </Target>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
 </Project>

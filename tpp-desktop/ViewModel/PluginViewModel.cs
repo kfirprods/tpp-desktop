@@ -4,6 +4,14 @@ using tpp_desktop.Utilities;
 
 namespace tpp_desktop.ViewModel
 {
+    public enum PluginExecutionStage
+    {
+        Loading,
+        ProcessingFile,
+        UserInput,
+        Shutdown
+    }
+
     public class PluginViewModel
     {
         public string Name { get; set; }
@@ -13,6 +21,9 @@ namespace tpp_desktop.ViewModel
         // TODO: Notify property changed
         public int RemotePluginId { get; set; }
         public string Author { get; set; }
+
+        // TODO: Notify property changed
+        public PluginExecutionStage ExecutionStage { get; set; }
 
         public PluginViewModel(string name, string description, string localFilePath, int remotePluginId, string author)
         {
