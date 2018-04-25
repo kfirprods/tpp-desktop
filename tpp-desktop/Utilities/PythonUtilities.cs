@@ -7,7 +7,7 @@ namespace tpp_desktop.Utilities
         public static void RunScript(string path, string arguments)
         {
             // TODO: Fetch from settings
-            var pythonExecutablePath = "F:\\Python27\\python.exe";
+            var pythonExecutablePath = "C:\\Python27\\python.exe";
 
             var processStartInfo = new ProcessStartInfo
             {

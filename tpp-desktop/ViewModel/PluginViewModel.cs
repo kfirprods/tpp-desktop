@@ -1,4 +1,8 @@
-﻿namespace tpp_desktop.ViewModel
+﻿using System;
+using Api;
+using tpp_desktop.Utilities;
+
+namespace tpp_desktop.ViewModel
 {
     public class PluginViewModel
     {
@@ -17,6 +21,42 @@
             this.LocalFilePath = localFilePath;
             this.RemotePluginId = remotePluginId;
             this.Author = author;
+        }
+
+        public void Run(string[] files)
+        {
+            // Run a server
+            var serverName = $"{this.Name}Server";
+            // TODO: Check availability
+            var serverPort = 1739;
+            var ice = Ice.Util.initialize();
+            var adapter =
+                ice.createObjectAdapterWithEndpoints($"{serverName}Adapter", $"default -p {serverPort}");
+            var guiServant = new GuiOperationsServant();
+            adapter.add(guiServant, ice.stringToIdentity(serverName));
+            adapter.activate();
+            
+            // Run the plugin and connect to its server
+            // TODO: Check for availability
+            var port = 1738;
+
+            // TODO: Fetch dynamically
+            var pluginRunnerPath = "C:\\Projects\\tpp-desktop\\py\\plugin_runner.py";
+
+            PythonUtilities.RunScript(pluginRunnerPath, $"\"{this.LocalFilePath}\" \"{this.Name}\" {serverName} {serverPort} {port}");
+
+            var communicator = Ice.Util.initialize();
+            var obj = communicator.stringToProxy($"{this.Name}:default -p {port}");
+            var plugin = PluginPrxHelper.checkedCast(obj);
+            if (plugin == null)
+            {
+                throw new ApplicationException("Invalid proxy");
+            }
+
+            plugin.execute(files);
+            plugin.shutdown();
+            ice.shutdown();
+            ice.destroy();
         }
     }
 }

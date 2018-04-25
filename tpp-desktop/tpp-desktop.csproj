@@ -99,8 +99,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\PropertyChangedNotifier.cs" />
+    <Compile Include="Utilities\GuiOperationsServant.cs" />
     <Compile Include="ViewModel\ControllerViewModel.cs" />
-    <Compile Include="PluginRunner.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Resources\ClientServerApi.cs" />
     <Compile Include="Utilities\DataExtensions.cs" />
@@ -108,6 +108,9 @@
     <Compile Include="ViewModel\PluginGroupViewModel.cs" />
     <Compile Include="ViewModel\PluginViewModel.cs" />
     <Compile Include="View\Converters\BooleanToFavoriteStringConverter.cs" />
+    <Compile Include="View\FilesDragDropControl.xaml.cs">
+      <DependentUpon>FilesDragDropControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GroupDetailControl.xaml.cs">
       <DependentUpon>GroupDetailControl.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\FilesDragDropControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\GroupDetailControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

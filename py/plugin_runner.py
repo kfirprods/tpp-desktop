@@ -3,15 +3,31 @@ import sys
 import imp
 
 import Ice
+import ClientServerApi_ice as ClientServerApi
+
+
+def connect_to_frontend(name, port):
+    ic = Ice.initialize(sys.argv)
+    base = ic.stringToProxy("{}:default -p {}".format(name, port))
+    return ClientServerApi.GuiOperations.checkedCast(base)
+
 
 
 def main():
     plugin_path = sys.argv[1]
     plugin_name = sys.argv[2]
-
+    
+    frontend_name = sys.argv[3]
+    frontend_port = sys.argv[4]
+    
+    print "Connecting to frontend..."
+    frontend_api = connect_to_frontend(frontend_name, frontend_port)
+    print "Connected!"
+    frontend_api.ShowMessageBox("Works")
+  
     port = 1738
-    if len(sys.argv) > 3:
-        port = sys.argv[3]
+    if len(sys.argv) > 5:
+        port = sys.argv[5]
 
     plugin_directory_path, plugin_module_name = os.path.split(plugin_path)
     plugin_module_name = plugin_module_name.replace(".py", "")
@@ -26,7 +42,7 @@ def main():
         )
         print "{} will now be available on port {}".format(plugin_name, port)
 
-        object = plugin_class()
+        object = plugin_class(frontend_api)
         adapter.add(object, communicator.stringToIdentity(plugin_name))
         adapter.activate()
         communicator.waitForShutdown()

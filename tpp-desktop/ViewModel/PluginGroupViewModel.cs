@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using tpp_desktop.Common;
+using Telerik.Windows.Controls;
 
 namespace tpp_desktop.ViewModel
 {
@@ -45,6 +48,31 @@ namespace tpp_desktop.ViewModel
 
         private ObservableCollection<PluginViewModel> _plugins;
         public ObservableCollection<PluginViewModel> Plugins => this._plugins ?? (this._plugins = new ObservableCollection<PluginViewModel>());
+
+        private PluginViewModel _currentRunningPlugin;
+
+        public PluginViewModel CurrentRunningPlugin
+        {
+            get => this. _currentRunningPlugin;
+            set
+            {
+                this._currentRunningPlugin = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private DelegateCommand _runCommand;
+
+        public DelegateCommand RunCommand => this._runCommand ?? (this._runCommand = new DelegateCommand((files) =>
+        {
+            var selectedFiles = (string[]) files;
+
+            foreach (var plugin in this.Plugins)
+            {
+                this.CurrentRunningPlugin = plugin;
+                plugin.Run(selectedFiles);
+            }
+        }, (files) => true));
 
         public PluginGroupViewModel(int pluginId, string name, string description, string author, bool isFavorite, int remoteGroupId, IEnumerable<PluginViewModel> plugins)
         {

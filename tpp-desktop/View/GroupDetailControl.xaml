@@ -86,60 +86,6 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-
-        <ControlTemplate x:Key="AddFilesButtonTemplate" TargetType="{x:Type Button}">
-            <Grid>
-                <Image Name="Normal"
-                       Source="/Resources/plus-sign.png"
-                       Width="{TemplateBinding Width}"
-                       Height="{TemplateBinding Height}"
-                       Opacity="0.85" />
-
-                <Image Name="Disabled"
-                       Source="/Resources/plus-sign.png"
-                       Width="{TemplateBinding Width}"
-                       Height="{TemplateBinding Height}"
-                       Opacity="0.85"
-                       Visibility="Collapsed" />
-
-                <Image Name="Hover" 
-                       Source="/Resources/plus-sign.png"
-                       Width="{TemplateBinding Width}"
-                       Height="{TemplateBinding Height}"
-                       Opacity="0.7"
-                       Visibility="Collapsed" />
-
-                <Image Name="Pressed" 
-                       Source="/Resources/plus-sign.png"
-                       Width="{TemplateBinding Width}"
-                       Height="{TemplateBinding Height}"
-                       Opacity="1" 
-                       Visibility="Collapsed"/>
-
-            </Grid>
-
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter TargetName="Normal" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="Hover" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter TargetName="Normal" Property="Visibility" Value="Collapsed" />
-                    <Setter TargetName="Hover" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="Pressed" Property="Visibility" Value="Collapsed"/>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="False">
-                    <Setter TargetName="Normal" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="Hover" Property="Visibility" Value="Collapsed" />
-                    <Setter TargetName="Pressed" Property="Visibility" Value="Collapsed"/>
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter TargetName="Normal" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="Disabled" Property="Visibility" Value="Visible"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
     </UserControl.Resources>
 
     <Grid>
@@ -153,32 +99,9 @@
 
             <TextBlock FontSize="24" HorizontalAlignment="Center" Text="{Binding Name}" />
 
-            <Border BorderThickness="1,1,1,1" HorizontalAlignment="Center" Padding="120">
-                <Border.BorderBrush>
-                    <DrawingBrush Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
-                        <DrawingBrush.Drawing>
-                            <DrawingGroup>
-                                <GeometryDrawing Brush="Black">
-                                    <GeometryDrawing.Geometry>
-                                        <GeometryGroup>
-                                            <RectangleGeometry Rect="0,0,50,50" />
-                                            <RectangleGeometry Rect="50,50,50,50" />
-                                        </GeometryGroup>
-                                    </GeometryDrawing.Geometry>
-                                </GeometryDrawing>
-                            </DrawingGroup>
-                        </DrawingBrush.Drawing>
-                    </DrawingBrush>
-                </Border.BorderBrush>
-
-                <StackPanel>
-                    <TextBlock Text="Drag and drop files here to run the plugin group on them" />
-                    
-                    <Button Template="{StaticResource AddFilesButtonTemplate}" 
-                            Width="100" 
-                            Height="100" />
-                </StackPanel>
-            </Border>
+            <local:FilesDragDropControl Text="Drag and drop files here to run the plugin group on them" 
+                                        Margin="5" 
+                                        Command="{Binding RunCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>
