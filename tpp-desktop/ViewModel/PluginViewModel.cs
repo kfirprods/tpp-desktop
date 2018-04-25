@@ -33,7 +33,7 @@ namespace tpp_desktop.ViewModel
             var adapter =
                 ice.createObjectAdapterWithEndpoints($"{serverName}Adapter", $"default -p {serverPort}");
             var guiServant = new GuiOperationsServant();
-            adapter.add(guiServant, ice.stringToIdentity(serverName));
+            adapter.add(guiServant, Ice.Util.stringToIdentity(serverName));
             adapter.activate();
             
             // Run the plugin and connect to its server
@@ -53,6 +53,7 @@ namespace tpp_desktop.ViewModel
                 throw new ApplicationException("Invalid proxy");
             }
 
+            // TODO: Deal with user errors
             plugin.execute(files);
             plugin.shutdown();
             ice.shutdown();

@@ -13,8 +13,7 @@ namespace tpp_desktop.Utilities
             {
                 FileName = pythonExecutablePath,
                 Arguments = $"{path} {arguments}",
-                UseShellExecute = false,
-                RedirectStandardOutput = true
+                UseShellExecute = true,
             };
 
             Process.Start(processStartInfo);

@@ -3,13 +3,13 @@ import sys
 import imp
 
 import Ice
-import ClientServerApi_ice as ClientServerApi
+import Api
 
 
 def connect_to_frontend(name, port):
     ic = Ice.initialize(sys.argv)
     base = ic.stringToProxy("{}:default -p {}".format(name, port))
-    return ClientServerApi.GuiOperations.checkedCast(base)
+    return Api.GuiOperationsPrx.checkedCast(base)
 
 
 
@@ -23,7 +23,6 @@ def main():
     print "Connecting to frontend..."
     frontend_api = connect_to_frontend(frontend_name, frontend_port)
     print "Connected!"
-    frontend_api.ShowMessageBox("Works")
   
     port = 1738
     if len(sys.argv) > 5:
