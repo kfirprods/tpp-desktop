@@ -65,7 +65,7 @@ namespace tpp_desktop.ViewModel
 
         public DelegateCommand RunCommand => this._runCommand ?? (this._runCommand = new DelegateCommand((files) =>
         {
-            var selectedFiles = (string[]) files;
+            var selectedFiles = (IEnumerable<string>[]) files;
 
             foreach (var plugin in this.Plugins)
             {

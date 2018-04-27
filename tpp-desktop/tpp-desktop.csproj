@@ -260,6 +260,11 @@
   <ItemGroup>
     <Resource Include="Resources\plus-sign.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\back-arrow.png" />
+    <Resource Include="Resources\back-arrow-hover.png" />
+    <Resource Include="Resources\back-arrow-pressed.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

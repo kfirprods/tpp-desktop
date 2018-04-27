@@ -48,7 +48,6 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter TargetName="Normal" Property="Visibility" Value="Collapsed" />
                     <Setter TargetName="Hover" Property="Visibility" Value="Visible" />
-                    <Setter TargetName="Pressed" Property="Visibility" Value="Collapsed"/>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="False">
                     <Setter TargetName="Normal" Property="Visibility" Value="Visible" />

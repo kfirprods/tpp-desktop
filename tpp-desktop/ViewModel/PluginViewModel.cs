@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Api;
 using tpp_desktop.Utilities;
 
@@ -34,7 +36,7 @@ namespace tpp_desktop.ViewModel
             this.Author = author;
         }
 
-        public void Run(string[] files)
+        public void Run(IEnumerable<string> files)
         {
             // Run a server
             var serverName = $"{this.Name}Server";
@@ -65,7 +67,7 @@ namespace tpp_desktop.ViewModel
             }
 
             // TODO: Deal with user errors
-            plugin.execute(files);
+            plugin.execute(files.ToArray());
             plugin.shutdown();
             ice.shutdown();
             ice.destroy();

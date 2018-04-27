@@ -60,13 +60,13 @@ namespace tpp_desktop.View
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog
+            var dialog = new RadOpenFolderDialog()
             {
                 Multiselect = true,
-                Filter = "All Files|*.*"
             };
 
-            var dialogResult = dialog.ShowDialog();
+            dialog.ShowDialog();
+            var dialogResult = dialog.DialogResult;
 
             if (dialogResult.HasValue && dialogResult.Value)
             {
