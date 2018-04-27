@@ -108,6 +108,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\PropertyChangedNotifier.cs" />
+    <Compile Include="Resources\XamlSpinners\ucSpinnerApple.xaml.cs">
+      <DependentUpon>ucSpinnerApple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\XamlSpinners\ucSpinnerCogs.xaml.cs">
+      <DependentUpon>ucSpinnerCogs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\XamlSpinners\ucSpinnerDotCircle.xaml.cs">
+      <DependentUpon>ucSpinnerDotCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\XamlSpinners\ucSpinnerPiston.xaml.cs">
+      <DependentUpon>ucSpinnerPiston.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\XamlSpinners\ucSpinnerSwirl.xaml.cs">
+      <DependentUpon>ucSpinnerSwirl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\XamlSpinners\ucTail.xaml.cs">
+      <DependentUpon>ucTail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\GuiOperationsServant.cs" />
     <Compile Include="ViewModel\ControllerViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -147,6 +165,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\XamlSpinners\ucSpinnerApple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\XamlSpinners\ucSpinnerCogs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\XamlSpinners\ucSpinnerDotCircle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\XamlSpinners\ucSpinnerPiston.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\XamlSpinners\ucSpinnerSwirl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\XamlSpinners\ucTail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ActivePluginControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

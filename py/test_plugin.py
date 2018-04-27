@@ -10,8 +10,6 @@ class TestPlugin(Api.Plugin):
     def execute(self, files, current=None):
         with open(r"C:\temp\test.txt", "wb") as f:
             f.write("3333")
-        
-        self.__frontend_api.ShowMessageBox("Done")
 
     def shutdown(self, current=None):
         current.adapter.getCommunicator().shutdown()

@@ -23,7 +23,7 @@ namespace tpp_desktop.ViewModel
         public string Author { get; set; }
 
         // TODO: Notify property changed
-        public PluginExecutionStage ExecutionStage { get; set; }
+        public PluginExecutionStage ExecutionStage { get; set; } = PluginExecutionStage.Loading;
 
         public PluginViewModel(string name, string description, string localFilePath, int remotePluginId, string author)
         {

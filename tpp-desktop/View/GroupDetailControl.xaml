@@ -7,7 +7,6 @@
              xmlns:viewModel="clr-namespace:tpp_desktop.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Padding="20"
              d:DataContext="{d:DesignInstance viewModel:PluginGroupViewModel}">
 
     <UserControl.Resources>
@@ -89,7 +88,18 @@
     </UserControl.Resources>
 
     <Grid>
-        <StackPanel>
+        <StackPanel x:Name="MainView" Margin="20">
+            <StackPanel.Style>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentRunningPlugin}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+            
             <Button Template="{StaticResource BackButtonTemplate}"
                     Width="40" 
                     Height="40"
@@ -103,5 +113,19 @@
                                         Margin="5" 
                                         Command="{Binding RunCommand}" />
         </StackPanel>
+        
+        <local:ActivePluginControl DataContext="{Binding CurrentRunningPlugin}">
+            <local:ActivePluginControl.Style>
+                <Style TargetType="{x:Type local:ActivePluginControl}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=MainView, Path=Visibility}" Value="Collapsed">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </local:ActivePluginControl.Style>
+        </local:ActivePluginControl>
     </Grid>
 </UserControl>

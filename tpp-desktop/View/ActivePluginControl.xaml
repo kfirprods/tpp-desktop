@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tpp_desktop.View"
              xmlns:viewModel="clr-namespace:tpp_desktop.ViewModel"
+             xmlns:spinners="clr-namespace:Spinners"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModel:PluginViewModel}">
     <Grid>
         <!-- Loading -->
-        <Grid Background="#66000000">
+        <Grid Background="#26000000">
             <Grid.Style>
                 <Style TargetType="{x:Type Grid}">
                     <Setter Property="Visibility" Value="Collapsed" />
@@ -23,6 +24,8 @@
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
+            
+            <spinners:ucSpinnerPiston Width="200" Height="200" />
         </Grid>
         
         <!-- Processing file -->
