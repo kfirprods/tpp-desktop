@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using tpp_desktop.Common;
 using Telerik.Windows.Controls;
@@ -65,12 +66,12 @@ namespace tpp_desktop.ViewModel
 
         public DelegateCommand RunCommand => this._runCommand ?? (this._runCommand = new DelegateCommand((files) =>
         {
-            var selectedFiles = (IEnumerable<string>[]) files;
+            var selectedFiles = (IEnumerable<string>) files;
 
             foreach (var plugin in this.Plugins)
             {
                 this.CurrentRunningPlugin = plugin;
-                plugin.Run(selectedFiles);
+                Task.Run(() => { plugin.Run(selectedFiles); });
             }
         }, (files) => true));
 

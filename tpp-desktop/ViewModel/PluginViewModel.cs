@@ -66,7 +66,7 @@ namespace tpp_desktop.ViewModel
                 throw new ApplicationException("Invalid proxy");
             }
 
-            // TODO: Deal with user errors
+            // TODO: Deal with user errors using Ice
             plugin.execute(files.ToArray());
             plugin.shutdown();
             ice.shutdown();

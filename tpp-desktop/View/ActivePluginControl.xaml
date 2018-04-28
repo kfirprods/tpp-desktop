@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tpp_desktop.View"
              xmlns:viewModel="clr-namespace:tpp_desktop.ViewModel"
-             xmlns:spinners="clr-namespace:Spinners"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModel:PluginViewModel}">
@@ -25,7 +25,7 @@
                 </Style>
             </Grid.Style>
             
-            <spinners:ucSpinnerPiston Width="200" Height="200" />
+            <fa:ImageAwesome Icon="Cog" Spin="True" SpinDuration="4" Width="160" Height="160" />
         </Grid>
         
         <!-- Processing file -->
